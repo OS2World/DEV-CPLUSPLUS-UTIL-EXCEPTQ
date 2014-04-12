@@ -1,16 +1,12 @@
-# $Id: sample.mak,v 1.3 2007/09/13 01:14:15 Steven Exp $
+# $Id: sample.mak,v 1.2 2005/08/08 17:02:28 root Exp $
 
-# 12 Sep 07 SHL Support TRYTRAP16
-
-BASE = sample
+BASE = sample5
 
 .SUFFIXES:
 
 .SUFFIXES: .c
 
-!ifdef TRYTRAP16
 DTRYTRAP16 = /DTRYTRAP16=1
-!endif
 
 CC = icc
 LINK = ilink

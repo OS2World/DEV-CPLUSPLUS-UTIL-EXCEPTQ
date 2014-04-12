@@ -1,5 +1,5 @@
-/**********************************************************************/
-/*                           IBM Internal Use Only                    */
+
+/* $Id: traptrap.c,v 1.4 2005/08/08 17:09:34 root Exp $ */
 /**********************************************************************/
 /*                                                                    */
 /*  TRAPTRAP                                                          */
@@ -30,14 +30,19 @@
 /* changed: Marc Fiammante, July 1995                                 */
 /*    Put in WalkStack and other goodies                              */
 /**********************************************************************/
+
 #define INCL_BASE
 #include <os2.h>
+
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <time.h>
+
 #include "sym.h"
 #include "omf.h"
+
 /*-------- Various Buffers and pointers ------*/
 CHAR   CmdBuf[256];
 CHAR   ObjectBuffer[256];
@@ -320,8 +325,8 @@ typedef struct qsTrec_s {
     ULONG     systime;    /* thread system time */
     ULONG     usertime;   /* thread user time */
     UCHAR     state;      /* thread state */
-    UCHAR     PADCHAR;
-    USHORT    PADSHORT;
+    PADCHAR;
+    PADSHORT;
 } qsTrec_t;
 /* Process and Thread Data Section */
 typedef struct qsPrec_s {
@@ -2120,4 +2125,3 @@ void print_vars(ULONG stackofs)
       fprintf(hTrap, "\n");
    }
 }
-

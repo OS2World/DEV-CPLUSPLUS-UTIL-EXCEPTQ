@@ -1,28 +1,21 @@
-# IBM Developer's Workframe/2 Make File Creation run at 19:30:24 on 10/09/92
-
-# Make File Creation run in directory:
-#   H:\EXCEPT;
+# $Id: traptrap.mak,v 1.2 2005/08/08 17:06:22 root Exp $
 
 .SUFFIXES:
 
 .SUFFIXES: .c
 
-TRAPTRAP.EXE:  \
-  TRAPTRAP.OBJ \
-  TRAPTRAP.DEF \
-  TRAPTRAP.MAK
-   @REM @<<TRAPTRAP.@0
-     /M /W /CO +
-     TRAPTRAP.OBJ
-     TRAPTRAP.EXE
-
-     DIS386.LIB
-     TRAPTRAP.DEF;
+traptrap.exe:  \
+  traptrap.obj \
+  traptrap.def \
+  traptrap.mak
+   @ilink @<<traptrap.lrf
+     /DE /IG /M /NOL /PM:VIO
+     traptrap.obj
+     dis386.lib
+     traptrap.def
 <<
-   LINK386.EXE @TRAPTRAP.@0
 
-{.}.c.obj:
-   ICC.EXE /Sm /Ss /Lx /O- /Ti /Gm /Ge+ /C .\$*.c
+.c.obj:
+   icc /Sm /Ss /Lx /O- /Ti /Gm /Ge+ /C $*.c
 
-!include TRAPTRAP.DEP
-
+traptrap.obj:  traptrap.c omf.h traptrap.mak

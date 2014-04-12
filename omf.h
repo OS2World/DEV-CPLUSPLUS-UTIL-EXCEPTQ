@@ -1,8 +1,17 @@
-/*
-**
-** OMF.H - Object Module Format structures
-**
+/*********************************************************************
+  omf.h - OMF Object Module Format data structures
+  $Id: omf.h,v 1.3 2008/05/24 23:24:19 Steven Exp $
+
+  Debug info definitions apply to IBM and BC HLL debug format
+
+  03 Aug 05 SHL Restore default packing
+  22 May 08 SHL Correct debug_head_rec
+  22 May 08 SHL Localize more here
 */
+
+#pragma pack(1)
+
+// MZ executable header
 
 struct exehdr_rec {
    BYTE     signature[2];              // Must be "MZ"
@@ -23,6 +32,8 @@ struct exehdr_rec {
    BYTE     oem_info[24];              // OEM Info
    ULONG    lexe_offset;               // Offset to linear header
 };
+
+// LX executable header
 
 struct lexehdr_rec {
    BYTE     signature[2];              // Must be "LX"
@@ -74,26 +85,80 @@ struct lexehdr_rec {
    ULONG    stacksize;                 // Stack size
 };
 
+//=== OMF HLL debug info ===
+
+/* Known formats
+
+   NB00	Microsoft 32-bit CodeView
+   NB01	Microsoft AIX symbol
+   NB02		Microsoft 16-bit CodeView, aka pre-CV4, Microsoft Link v5.1 IBM C v6.0?
+   NB03		IBM HLL CSet/2
+   NB04		32-bit OS/2 Program Manager, aka IBM HLL, VAC 3.x
+   NB05		CodeView V4, Microsoft Link v5.20+
+   NB06	Microsoft packed
+   NB07	Microsoft, Quick C for Windows 1.0 only
+   NB08	Microsoft CodeView packed?, debugger versions 4.00 through 4.05
+   NB09		CodeView V4 cvpack'ed, Microsoft CodeView v4.10+
+
+   FB09		Borland Open Architecture BC2.0 OS/2
+*/
+
+#define         DBUGSIG         0x424E	/* "NB" IBM HLL signature */
+#define         BCSIG           0x4246	/* "FB" Borland OA signature */
+
+// Debug info header
+
 struct debug_head_rec {
-   BYTE signature[3];                  // Debug signature
-   BYTE type;                          // Debug info type
+   USHORT signature;                  // Debug signature 'NB' or 'FB'
+   USHORT version;                    // Debug info type '00' '01' '04' ...
+   ULONG lfoDir;		      // offset to directory entries from debug_head_rec
 };
 
-struct dir_inf_rec {
+// Debug info tail record - last 8 bytes of file/data
+// ss = Subsection
+
+struct debug_tail_rec {
+   USHORT signature;                  // Debug signature 'NB' or 'FB'
+   USHORT version;                    // Debug info type '00' '01' '04' ...
+   ULONG offset;                      // Offset to dir_info_rec from end of file
+};
+
+// CV3 debug subsection (ss) directory info header - NB02?
+
+struct cv_dirinf_rec {
    USHORT   dirstruct_size;            // Size of directory structure
    USHORT   number_of_entries;         // Number of dnt_rec's in the array
    USHORT   unknown;                   // Unknown data
-   // Followed by an array of dnt_rec structures
+   // Array of dnt_rec structures follows
 };
 
-struct dnt_rec {
+/* HLL debug subsection (ss) directory info header - NB04 */
+struct hll_dirinfo_rec {
+    USHORT cbDirHeader;			// Header size
+    USHORT cbDirEntry;			// Directory entry size
+    ULONG cDir;				// Number of directory entries
+};
+
+
+// subsect_type definitions
+#define         SSTMODULES      0x0101	/* Modules */
+#define         SSTPUBLICS      0x0102	/* Public symbols */
+#define         SSTTYPES        0x0103	/* Types */
+#define         SSTSYMBOLS      0x0104	/* Symbols */
+#define         SSTSRCLINES     0x0105	/* Line numbers - (IBM C/2 1.1) */
+#define         SSTLIBRARIES    0x0106	/* Libraries */
+#define         SSTSRCLINES2    0x0109	/* Line numbers - (MSC 6.00) */
+#define         SSTSRCLINES32   0x010B	/* Line numbers - (IBM HLL) */
+
+// Directory subsection descriptor
+struct hll_dir_entry {
    USHORT   subsect_type;              // sst Subsection type
    USHORT   mod_index;                 // Module index (1-based)
-   ULONG    offset;                    // Offset of start of section
+   ULONG    offset;                    // Offset of start of section from start of data
    ULONG    size;                      // Size of section
 };
 
-// Modules subsection
+// Module subsection header (SSTMODULES)
 struct modules_rec {
    USHORT   code_seg_base;             // Code segment base
    ULONG    code_seg_offset;           // Code segment offset
@@ -107,7 +172,7 @@ struct modules_rec {
    BYTE     name_len;                  // Length of name (which follows)
 };
 
-// Publics subsection
+// Publics subsection (SSTPUBLICS)
 struct publics_rec {
    ULONG    offset;                    // Offset
    USHORT   segment;                   // Segment
@@ -125,34 +190,43 @@ struct linhead_rec {
 };
 #endif
 
-// First linenumber record
+// First linenumber record (special)
+
+// entry_type values
+#define LINEREC_SRC_LINES	0	// Source line numbers
+#define LINEREC_LIST_LINES	1	// Listing lines numbers
+#define LINEREC_SRCLIST_LINES	2	// Combo source and listing line numbers
+#define LINEREC_FILENAMES	3	// Filenames list
+#define LINEREC_PATHINFO	4	// path info
+
 struct linfirst_rec {
    USHORT   lineno;                    // Line number (0)
    BYTE     entry_type;                // Entry type
    BYTE     reserved;                  // Reserved
    USHORT   entries_count;             // Number of table entries
    USHORT   segment_no;                // Segment number
-   ULONG    filename_tabsize;          // File names table size
+   union {
+     ULONG    seg_address;             // Logical Segment address - type 0, 1, 2
+     ULONG    length;		       // record length in bytes - type 3
+   } u;				       // omitted for type 4
+				       // line records follow
 };
 
-
-// Source line numbers
+// Source line numbers - LINEREC_SRC_LINES
 struct linsource_rec {
    USHORT   source_line;               // Source file line number
-   USHORT   source_idx;                // Source file index
+   USHORT   source_idx;                // Source file index (1..n)
    ULONG    offset;                    // Offset into segment
 };
 
-
-// Listing statement numbers
+// Listing statement numbers - LINEREC_LIST_LINES
 struct linlist_rec {
-   ULONG    list_line;                 // Listing file linenumber
+   ULONG    list_line;                 // Listing file line number
    ULONG    statement;                 // Listing file statement number
    ULONG    offset;                    // Offset into segment
 };
 
-
-// Source and Listing statement numbers
+// Source and Listing statement numbers - LINEREC_SRCLIST_LINES
 struct linsourcelist_rec {
    USHORT   source_line;               // Source file line number
    USHORT   source_idx;                // Source file index
@@ -161,22 +235,20 @@ struct linsourcelist_rec {
    ULONG    offset;                    // Offset into segment
 };
 
-
-// Path table
+// Path table - LINEREC_PATH
 struct pathtab_rec {
    ULONG    offset;                    // Offset into segment
    USHORT   path_code;                 // Path code
    USHORT   source_idx;                // Source file index
 };
 
-
-// File names table
+// File names table - LINEREC_FILENAMES - must be 1st linenumbers record
 struct filenam_rec {
    ULONG    first_char;                // First displayable char in list file
    ULONG    disp_chars;                // Number of displayable chars in list line
    ULONG    filecount;                 // Number of source/listing files
+				       // names follow prefixed by 1 bytes length
 };
-
 
 // Symbol types
 #define SYM_BEGIN          0x00        // Begin block
@@ -206,7 +278,6 @@ struct filenam_rec {
 #define SYM_CPPSTAT        0x1E        // C++ Static var
 #define SYM_COMP           0x40        // Compiler information
 
-
 // Symbolic begin record
 struct symbegin_rec {
    ULONG    offset;                    // Segment offset
@@ -215,7 +286,6 @@ struct symbegin_rec {
    // Block name follows
 };
 
-
 // Symbolic auto var record
 struct symauto_rec {
    ULONG    stack_offset;              // Stack offset
@@ -223,7 +293,6 @@ struct symauto_rec {
    BYTE     name_len;                  // Length of name
    // Var name follows
 };
-
 
 // Symbolic procedure record
 struct symproc_rec {
@@ -238,7 +307,6 @@ struct symproc_rec {
    // Function name follows
 };
 
-
 // Symbolic static var record
 struct symstatic_rec {
    ULONG    offset;                    // Segment offset
@@ -247,7 +315,6 @@ struct symstatic_rec {
    BYTE     name_len;                  // Length of name
    // Var name follows
 };
-
 
 // Symbolic label var record
 struct symlabel_rec {
@@ -308,7 +375,6 @@ struct symtag_rec {
    // Name follows
 };
 
-
 // Symbolic table record
 struct symtable_rec {
    ULONG    offset;                    // Segment offset
@@ -319,15 +385,12 @@ struct symtable_rec {
    // Name follows
 };
 
-
 // Type record
 struct type_rec {
    USHORT   length;                    // Length of sub-record
    BYTE     type;                      // Sub-record type
    BYTE     type_qual;                 // Type qualifier
 };
-
-
 
 // Types
 #define TYPE_CLASS         0x40        // Class
@@ -362,7 +425,6 @@ struct type_rec {
 #define TYPE_ENUM          0x7B        // Enum
 #define TYPE_LIST          0x7F        // List
 
-
 // Type userdef
 struct type_userdefrec {
    BYTE     FID_index;                 // Field ID
@@ -370,7 +432,6 @@ struct type_userdefrec {
    BYTE     FID_string;                // String ID
    BYTE     name_len;                  // Length of name which follows
 };
-
 
 // Type function
 struct type_funcrec {
@@ -381,7 +442,6 @@ struct type_funcrec {
    BYTE     FID_index1;                // String ID
    USHORT   typelist_index;            // Index of list of params
 };
-
 
 // Type struct
 struct type_structrec {
@@ -426,3 +486,7 @@ struct type_pointerrec {
    BYTE     FID_string;                // String identifier
    BYTE     name_len;                  // Length of name which follows
 };
+
+#pragma pack()
+
+// The end

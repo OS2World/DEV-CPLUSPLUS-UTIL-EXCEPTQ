@@ -22,4 +22,3 @@ in OS/2 see APAR PJ06136 that is why I dump all of the stack memory
 object.
 I did not test it with 16:16 code maybe a problem for the stack dump.
 I did not include Disasm either as in EXCEPTQ.
-

@@ -58,4 +58,3 @@ main()
     ForceExit();
     printf("After ForceExit\n");  /* Should never be displayed */
 }
-

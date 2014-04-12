@@ -1,5 +1,8 @@
 .*--------------------------------------------------------------------
 .* This file contains the tagged source for EXCEPT Package
+.* $Id: except.ipf,v 1.2 2008/05/24 23:25:28 Steven Exp $
+.*
+.* 23 May 08 SHL Restore control area
 .*--------------------------------------------------------------------
 
 :userdoc.
@@ -15,7 +18,8 @@
 .* specify no control area for pushbuttons
 .*--------------------------------------------------------------------
 
-:docprof toc=1 ctrlarea=none.
+.* :docprof toc=1 ctrlarea=none.
+:docprof toc=1
 
 .*--------------------------------------------------------------------
 .* Identify the heading level entries to be displayed in the contents
@@ -262,6 +266,3 @@ having resumed all frozen threads before.
 :p.Thread calling forcexit should not by in a Critical Section. See the
 EXITTEST.c for sample use.
 :euserdoc.
-
-
-

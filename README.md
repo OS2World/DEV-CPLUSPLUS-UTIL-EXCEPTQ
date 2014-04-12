@@ -10,12 +10,13 @@ LICENSE
 
 COMPILE TOOLS
 ===============
-* 
+* VAC 3.08
 
 AUTHORS
 ===============
 * Marc Fiammante
+* Steven Levine
 
 LINKS
 ===============
-* 
+* http://home.earthlink.net/~steve53/os2diags/index.html

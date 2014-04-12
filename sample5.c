@@ -1,15 +1,5 @@
-/**********************************************************************
-  sample.c - test exceptq.dll using automatic loading
-  $Id: sample.c,v 1.3 2007/09/13 01:13:17 Steven Exp $
-
- SAMPLE 32 bit program to access EXCEPTQ.DLL exception handler via
- automatically loaded DLL (i.e VAC #pragma handler)
- generates a TRAP to demonstrate information gathering
-
- 06 Mar 04 SHL Baseline
- 12 Sep 07 SHL Comments
-
-**********************************************************************/
+/* $Id: $
+*/
 
 /**********************************************************************/
 /*                                                                    */
@@ -21,8 +11,10 @@
 /*                                                                    */
 /* Version: 2.2             |   Marc Fiammante (FIAMMANT at LGEVM2)   */
 /*                          |   La Gaude FRANCE                       */
+/*                                                                    */
 /* History:                                                           */
 /* --------                                                           */
+/*                                                                    */
 /* created: Marc Fiammante December 1992                              */
 /**********************************************************************/
 

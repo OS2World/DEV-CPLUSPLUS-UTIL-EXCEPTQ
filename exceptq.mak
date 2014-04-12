@@ -1,29 +1,37 @@
-# IBM Developer's Workframe/2 Make File Creation run at 19:30:24 on 10/09/92
+# exceptq.mak - build exceptq.dll
+# $Id: exceptq.mak,v 1.4 2008/05/24 23:26:38 Steven Exp $
 
-# Make File Creation run in directory:
-#   H:\EXCEPT;
+# 26 Jul 02 SHL - Rework for VAC 3.08
+# 02 Aug 05 SHL - Clean up
+# 03 Aug 05 SHL - Add missing dependencies
+# 23 May 08 SHL - Add inf target
 
 .SUFFIXES:
 
 .SUFFIXES: .c
 
-EXCEPTQ.DLL:  \
-  EXCEPTQ.OBJ \
-  EXCEPTQ.DEF \
-  EXCEPTQ.MAK
-   @REM @<<EXCEPTQ.@0
-     /M /W /NOL /CO /PM:VIO +
-     EXCEPTQ.OBJ
-     EXCEPTQ.DLL
-
-     DIS386.LIB
-     EXCEPTQ.DEF;
+exceptq.dll:  \
+  exceptq.obj \
+  exceptq.def \
+  exceptq.mak
+  ilink @<<exceptq.lrf
+    /DE /IG /M /NOL /PM:VIO
+    /OUT:exceptq.dll
+    exceptq.obj
+    dis386.lib
+    exceptq.def
 <<
-   LINK386.EXE @EXCEPTQ.@0
-  IMPLIB EXCEPTQ.LIB EXCEPTQ.DEF
+  implib exceptq.lib exceptq.def
 
-{.}.c.obj:
-   ICC.EXE /Ti /Sm /Ss /Lx /O /Gm /Ge- /C .\$*.c
+.c.obj:
+  icc /Ti /Sm /Ss /Gm /Ge- /W3 /C $*.c
 
-!include EXCEPTQ.DEP
-
+exceptq.obj:  exceptq.c sym.h omf.h exceptq.mak
+
+inf: except.inf
+
+except.inf: except.ipf
+  ipfc /i $*.ipf
+  ren $@ $@
+
+# The end

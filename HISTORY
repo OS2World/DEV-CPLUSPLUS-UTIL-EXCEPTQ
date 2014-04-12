@@ -1,0 +1,61 @@
+
+Fri May 23 13:56:55 2008  Steven H. Levine <steve53@earthlink.net>
+
+	* exceptq.dll
+	  Support oversized (>64KiB) symbol files
+	  Output hex as dwords - makes addresses easier to read
+	  List labels on stack
+	  Show more in both hexidecimal and decimal
+	  Show exceptq version
+	  Show stack as dwords or words depending on segment size
+	  Support oversized (>64KiB) symbol files
+	  Support stripped LX executables
+
+	* sym.exe
+	  Support oversized (>64KiB) symbol files
+
+Wed Sep 12 18:41:04 2007  Steven H. Levine <steve53@earthlink.net>
+
+	* exceptq
+	  Generate hex trap file name
+	  Show PID etc. in hex/dec
+	  Show exceptq build date
+
+	* sample*.c
+	  Rework and augment
+
+Mon Aug 08 09:59:09 2005  Steven H. Levine <steve53@earthlink.net>
+
+	* exceptq
+	  Run thru gnu indent
+	  Correct filename identification
+
+	* traptrap
+	  Edit to compile clean
+
+xxx Aug 02 xx:xx:xx 2005  Steven H. Levine <steve53@earthlink.net>
+
+	* exceptq
+	  Rework to build with current toolkit
+
+xxx Jul 29 xx:xx:xx 2004  Steven H. Levine <steve53@earthlink.net>
+
+	* sym
+	  Rework to build under VAC
+	  Add object number to addresses
+
+xxx Aug 01 xx:xx:xx 2000  Steven H. Levine <steve53@earthlink.net>
+
+	* exceptq
+	  Read32PmDebug: avoid autovar_def overflow trap
+	  Read32PmDebug: avoid locating wrong function vars
+	  use symproc.length to bound lookup
+
+xxx Jul 26 xx:xx:xx 2000  Steven H. Levine <steve53@earthlink.net>
+
+	* Rework exceptq.mak for VAC
+
+Original code from DevCon v8.
+Additional fixes and updates from unknown sources.
+
+$Id: HISTORY,v 1.4 2008/05/24 23:32:36 Steven Exp $
