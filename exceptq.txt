@@ -1,0 +1,12 @@
+EXCEPTQ in a 32 bit DLL which implements an exception handler which
+saves the registers in a file named xxxx.TRP (xxxx=Pid,Tid) together
+with the Loaded modules code and data objects addresses, and also the
+failing thread stack dump and the process status as given by DosQProcStatus.
+Trapperq is an IBM C/2 program which shows how to implement the call to
+32 bits exception handler from a 16:16 bits program.
+enter Trapperq to generate a trap and the xxxx.TRP file.
+You are free to use that code as a sample for your programs. No support
+or guarantee from me implied.
+Cheers
+Marc Fiammante
+

@@ -1,0 +1,25 @@
+TRAPTRAP is a sample Trap catcher code using DosDebug.
+Usage is
+
+  TRAPTRAP [optional watch points] trapping_program arguments
+
+optional watch points syntax is :
+  /address1 [ /address2 [/address3 [ /address4 ]]]
+
+where address1 (2,3,4) are the linear addresses to watch up to 4
+addresses can be specified
+
+sample provided use > TRAPTRAP TEST
+where test.exe will trap
+
+sample watch point provided use > TRAPTRAP /20000 WATCH
+where watch.exe will write at linear address 20000
+run 1st watch alone to check address.
+
+it generates a PROCESS.TRP file similar to EXCEPTQ's
+the stack limits pointed in the FS:0 area are not value due to a bug
+in OS/2 see APAR PJ06136 that is why I dump all of the stack memory
+object.
+I did not test it with 16:16 code maybe a problem for the stack dump.
+I did not include Disasm either as in EXCEPTQ.
+
