@@ -1,0 +1,17 @@
+;
+; exceptq.def
+;
+LIBRARY EXCEPTQ INITINSTANCE
+DATA MULTIPLE NONSHARED
+DESCRIPTION '@#RLWalsh:7.10#@##1## 2011/03/01 07:10:00             ::EN:US:0::@@exceptq v7.10 - (c)2000-2010 S Levine & Assoc, (c)2010-2011 RL Walsh'
+
+EXPORTS
+    InstallExceptq
+    SetExceptqOptions
+    SETEXCEPT
+    UNSETEXCEPT
+    MYHANDLER
+    FORCEEXIT
+IMPORTS
+    DOSQPROCSTATUS=DOSCALL1.154
+

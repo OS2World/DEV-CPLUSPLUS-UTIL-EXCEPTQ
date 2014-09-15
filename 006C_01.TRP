@@ -1,0 +1,467 @@
+
+______________________________________________________________________
+
+ Exception Report - created 2011/03/01 07:10:00
+______________________________________________________________________
+
+ Firefox v4.0b12pre - build 20110219120230
+
+ OS2/eCS Version:  2.45
+ # of Processors:  4
+ Physical Memory:  2011 mb
+ Virt Addr Limit:  2048 mb
+ Exceptq Version:  7.10 (Mar 1 2011)
+
+______________________________________________________________________
+
+ Exception C0000005 - Access Violation
+______________________________________________________________________
+
+ Process:  M:\FOX\FIREFOX.EXE
+ PID:      6C (108)
+ TID:      01 (1)
+ Priority: 200
+
+ Filename: M:\FOX\XUL.DLL
+ Address:  005B:160CD8D4 (0001:00E8D8D4)
+ Cause:    Attempted to write to 00000000
+           (not a valid address)
+
+______________________________________________________________________
+
+ Failing Instruction
+______________________________________________________________________
+
+ 160CD8C4  MOV  [ESP], ESI               (893424)
+ 160CD8C7  CALL 0x160c74fc               (e8 309cffff)
+ 160CD8CC  JMP  0x160cd614               (e9 43fdffff)
+ 160CD8D1  LEA  ESI, [ESI+0x0]           (8d76 00)
+ 160CD8D4 >MOV  DWORD [0x0], 0x184b97f8  (c705 00000000 f8974b18)
+ 160CD8DE  MOV  EAX, [EBP+0x14]          (8b45 14)
+ 160CD8E1  MOV  [ESP+0x8], EAX           (894424 08)
+ 160CD8E5  MOV  [ESP+0x4], EDI           (897c24 04)
+
+______________________________________________________________________
+
+ Registers
+______________________________________________________________________
+
+ EAX : 01F300F6   EBX  : 00000410   ECX : 00000000   EDX  : 2003D3E0
+ ESI : 2003D3E0   EDI  : 01F300F6
+ ESP : 0012F934   EBP  : 0012F9AC   EIP : 160CD8D4   EFLG : 00210246
+ CS  : 005B       CSLIM: FFFFFFFF   SS  : 0053       SSLIM: FFFFFFFF
+ DS  : 0053       ES   : 0053       FS  : 150B       GS   : 0000
+
+ EAX : uncommitted memory allocated by LIBC063
+ EBX : not a valid address
+ ECX : not a valid address
+ EDX : read/write memory allocated by LIBC063
+ ESI : read/write memory allocated by LIBC063
+ EDI : uncommitted memory allocated by LIBC063
+
+______________________________________________________________________
+
+ Stack Info for Thread 01
+______________________________________________________________________
+
+   Size       Base        ESP         Max         Top
+ 00100000   00130000 -> 0012F934 -> 000FE000 -> 00030000
+
+______________________________________________________________________
+
+ Call Stack
+______________________________________________________________________
+
+   EBP     Address    Module     Obj:Offset    Nearest Public Symbol
+ --------  ---------  --------  -------------  -----------------------
+ Trap  ->  160CD8D4   XUL       0001:00E8D8D4  between nsWindow::ProcessMessage + 384 and fnwpNSWindow - 308  (both in nsWindow.o)
+
+ 0012F9AC  160CDC6A   XUL       0001:00E8DC6A  between fnwpNSWindow + 8E and nsWindow::{vtable} - 96  (both in nsWindow.o)
+
+ 0012F9FC  1FD059F9   PMMERGE   0004:001059F9  between WIN32DISPATCHMSG + F5 and CheckLoseBoost - 1B
+
+ 0012FA48  161D07E2   XUL       0001:00F907E2  between nsAppShell::ProcessNextNativeEvent + 52 and nsAppShell::ScheduleNativeEventCallback - E2  (both in nsAppShell.o)
+
+ 0012FA98  160046C3   XUL       0001:00DC46C3  between nsBaseAppShell::DoProcessNextNativeEvent + 27 and nsBaseAppShell::Exit - D  (both in nsBaseAppShell.o)
+
+ 0012FAB8  1600498A   XUL       0001:00DC498A  between nsBaseAppShell::OnProcessNextEvent + FA and nsBaseAppShell::OnDispatchedEvent::{thunk} - D6  (both in nsBaseAppShell.o)
+
+ 0012FAF8  1561DE66   XUL       0001:003DDE66  between nsThread::ProcessNextEvent + 92 and nsThread::HasPendingEvents - 246  (both in nsThread.o)
+
+ 0012FB58  1539C1C7   XUL       0001:0015C1C7  between NS_ProcessNextEvent_P + 23 and NS_HasPendingEvents_P - 21  (both in nsThreadUtils.o)
+
+ 0012FB88  16004ADC   XUL       0001:00DC4ADC  between nsBaseAppShell::Run + 34 and nsBaseAppShell::NativeEventCallback - 2C  (both in nsBaseAppShell.o)
+
+ 0012FBA8  15E53357   XUL       0001:00C13357  between nsAppStartup::Run + 3B and nsAppStartup::GetStartupInfo - F1  (both in nsAppStartup.o)
+
+ 0012FBC8  152D498F   XUL       0001:0009498F  between _XRE_main + 1543 and nsXULAppInfo::InvalidateCachesOnRestart::{thunk} - 1565  (both in nsAppRunner.o)
+
+ 0012FF48  00010248   FIREFOX   0001:00000248  between main + 104 and ___do_global_ctors - 178  (in nsBrowserApp.o and __main.obj)
+
+ 0012FFA0  00010021   FIREFOX   0001:00000021  between __text + 21 and _main - 123  (in {standard input} and nsBrowserApp.o)
+
+ 0012FFE0  1D14854B   LIBC063   0001:0002854B  appinit.s#16 ___init_app 0001:00028540 (appinit.obj)
+
+
+______________________________________________________________________
+
+ Labels on the Stack
+______________________________________________________________________
+
+   ESP     Address    Module     Obj:Offset    Nearest Public Symbol
+ --------  ---------  --------  -------------  -----------------------
+ 0012F9B0  160CDC6A   XUL       0001:00E8DC6A  between fnwpNSWindow + 8E and nsWindow::{vtable} - 96  (both in nsWindow.o)
+ 0012FA00  1FD059F9   PMMERGE   0004:001059F9  between WIN32DISPATCHMSG + F5 and CheckLoseBoost - 1B
+ 0012FA14  160CDBDC   XUL       0001:00E8DBDC  fnwpNSWindow  (in nsWindow.o)
+ 0012FA4C  161D07E2   XUL       0001:00F907E2  between nsAppShell::ProcessNextNativeEvent + 52 and nsAppShell::ScheduleNativeEventCallback - E2  (both in nsAppShell.o)
+ 0012FA6C  1561E0DE   XUL       0001:003DE0DE  between nsThread::HasPendingEvents + 32 and nsThread::SetPriority::{thunk} - 16  (both in nsThread.o)
+ 0012FA84  000103C5   FIREFOX   0001:000003C5  between ___do_global_ctors + 5 and ___main - 13  (both in __main.obj)
+ 0012FA9C  160046C3   XUL       0001:00DC46C3  between nsBaseAppShell::DoProcessNextNativeEvent + 27 and nsBaseAppShell::Exit - D  (both in nsBaseAppShell.o)
+ 0012FABC  1600498A   XUL       0001:00DC498A  between nsBaseAppShell::OnProcessNextEvent + FA and nsBaseAppShell::OnDispatchedEvent::{thunk} - D6  (both in nsBaseAppShell.o)
+ 0012FACC  16004E89   XUL       0001:00DC4E89  between nsBaseAppShell::Release + 15 and nsBaseAppShell::AddRef::{thunk} - 1F  (both in nsBaseAppShell.o)
+ 0012FAF4  16004888   XUL       0001:00DC4888  nsBaseAppShell::OnProcessNextEvent::{thunk}  (in nsBaseAppShell.o)
+ 0012FAFC  1561DE66   XUL       0001:003DDE66  between nsThread::ProcessNextEvent + 92 and nsThread::HasPendingEvents - 246  (both in nsThread.o)
+ 0012FB10  15D2A652   XUL       0001:00AEA652  between HandleDDENotification + 996 and nsNativeAppSupportOS2::Enable - 12  (both in nsNativeAppSupportOS2.o)
+ 0012FB24  15D2A652   XUL       0001:00AEA652  between HandleDDENotification + 996 and nsNativeAppSupportOS2::Enable - 12  (both in nsNativeAppSupportOS2.o)
+ 0012FB34  152D341E   XUL       0001:0009341E  between _XRE_InitCommandLine + B4E and _XRE_main - 2E  (both in nsAppRunner.o)
+ 0012FB5C  1539C1C7   XUL       0001:0015C1C7  between NS_ProcessNextEvent_P + 23 and NS_HasPendingEvents_P - 21  (both in nsThreadUtils.o)
+ 0012FB6C  1539C172   XUL       0001:0015C172  between NS_GetCurrentThread_P + 12 and NS_DispatchToCurrentThread_P - 2  (both in nsThreadUtils.o)
+ 0012FB8C  16004ADC   XUL       0001:00DC4ADC  between nsBaseAppShell::Run + 34 and nsBaseAppShell::NativeEventCallback - 2C  (both in nsBaseAppShell.o)
+ 0012FB9C  15D2A6AD   XUL       0001:00AEA6AD  between nsNativeAppSupportOS2::Enable + 49 and nsNativeAppSupportOS2::Observe::{thunk} - 7  (both in nsNativeAppSupportOS2.o)
+ 0012FBAC  15E53357   XUL       0001:00C13357  between nsAppStartup::Run + 3B and nsAppStartup::GetStartupInfo - F1  (both in nsAppStartup.o)
+ 0012FBB4  153553C4   XUL       0001:001153C4  between nsCommandLine::GetWindowContext + 38 and nsCommandLine::GetWorkingDirectory - B8  (both in nsCommandLine.o)
+ 0012FBCC  152D498F   XUL       0001:0009498F  between _XRE_main + 1543 and nsXULAppInfo::InvalidateCachesOnRestart::{thunk} - 1565  (both in nsAppRunner.o)
+ 0012FBD8  152D341E   XUL       0001:0009341E  between _XRE_InitCommandLine + B4E and _XRE_main - 2E  (both in nsAppRunner.o)
+ 0012FBEC  1D12ACEC   LIBC063   0001:0000ACEC  ialloc.c#313 __um_lump_alloc 0001:0000A874 (D:\CODING\LIBC\SVN\BRANCHES\LIBC-0.6\src\emx\src\lib\malloc\ialloc.c)
+ 0012FC30  00010011   FIREFOX   0001:00000011  between __text + 11 and _main - 133  (in {standard input} and nsBrowserApp.o)
+ 0012FC6C  1D12A6D6   LIBC063   0001:0000A6D6  fmutex.h#140 __umalloc 0001:0000A624 (D:\CODING\LIBC\SVN\BRANCHES\LIBC-0.6\src\emx\src\lib\malloc\umalloc.c)
+ 0012FC84  00010011   FIREFOX   0001:00000011  between __text + 11 and _main - 133  (in {standard input} and nsBrowserApp.o)
+ 0012FCBC  15377B49   XUL       0001:00137B49  between nsStringBuffer::Alloc + 15 and nsACString_internal::FindChar - 13  (both in nsSubstring.o)
+ 0012FCCC  1D186AD2   LIBC063   0001:00066AD2  ifree.c#139 __um_free_maybe_lock 0001:0006699C (ifree.obj)
+ 0012FCD8  00010005   FIREFOX   0001:00000005  between __text + 5 and _main - 13F  (in {standard input} and nsBrowserApp.o)
+ 0012FD1C  15378791   XUL       0001:00138791  between nsACString_internal::ReplacePrepInternal + 29 and nsACString_internal::Assign - CF  (both in nsSubstring.o)
+ 0012FD5C  15378FD2   XUL       0001:00138FD2  between nsACString_internal::Assign + 56 and nsACString_internal::Replace - E6  (both in nsSubstring.o)
+ 0012FDAC  15F00A18   XUL       0001:00CC0A18  between nsXREDirProvider::{vtable} + 8 and nsIFile::COMTypeInfo::kIID - 38  (both in nsXREDirProvider.o)
+ 0012FDB0  15F00A3C   XUL       0001:00CC0A3C  between nsXREDirProvider::{vtable} + 2C and nsIFile::COMTypeInfo::kIID - 14  (both in nsXREDirProvider.o)
+ 0012FDE0  1855DF40   NSPR4     0001:0001DF40   _QueryThreadContext 0002:00001980 (os2thred.o)
+ 0012FDE8  181611F0   EXCEPTQ   0001:000011F0  MYHANDLER  (in exceptq.c)
+ 0012FDFC  15395E50   XUL       0001:00155E50  between nsCreateInstanceByContractID::{vtable} + 8 and nsCreateInstanceByCID::{vtable} - 8  (both in nsComponentManagerUtils.o)
+ 0012FE00  152D2E74   XUL       0001:00092E74  between _XRE_InitCommandLine + 5A4 and _XRE_main - 5D8  (both in nsAppRunner.o)
+ 0012FE1C  15395E50   XUL       0001:00155E50  between nsCreateInstanceByContractID::{vtable} + 8 and nsCreateInstanceByCID::{vtable} - 8  (both in nsComponentManagerUtils.o)
+ 0012FE20  152D32E8   XUL       0001:000932E8  between _XRE_InitCommandLine + A18 and _XRE_main - 164  (both in nsAppRunner.o)
+ 0012FE2C  152D0D3D   XUL       0001:00090D3D  between nsXULAppInfo::GetVendor + 29 and nsSingletonFactory::Release - 2DF  (both in nsAppRunner.o)
+ 0012FE3C  1538A0AF   XUL       0001:0014A0AF  between nsLocalFile::Release + 15 and nsLocalFile::nsLocalFileConstructor - 37  (both in nsLocalFileOS2.o)
+ 0012FE4C  1538A037   XUL       0001:0014A037  between nsLocalFile::QueryInterface + 27 and nsDriveEnumerator::QueryInterface - 3  (both in nsLocalFileOS2.o)
+ 0012FE54  1538AA54   XUL       0001:0014AA54  between nsIHashable::{vtable} + 1C and nsILocalFileOS2::COMTypeInfo::kIID - 30  (both in nsLocalFileOS2.o)
+ 0012FE58  152D6520   XUL       0001:00096520  nsIFile::COMTypeInfo::kIID  (in nsAppRunner.o)
+ 0012FE6C  15387B26   XUL       0001:00147B26  between nsLocalFile::GetParent + 11C and nsLocalFile::Remove - 18  (both in nsLocalFileOS2.o)
+ 0012FE74  152D6520   XUL       0001:00096520  nsIFile::COMTypeInfo::kIID  (in nsAppRunner.o)
+ 0012FE80  152D8F45   XUL       0001:00098F45  between SetAllocatedString + E9 and _XRE_ParseAppData - 6F  (both in nsAppData.o)
+ 0012FE84  152D8F5F   XUL       0001:00098F5F  between SetAllocatedString + 103 and _XRE_ParseAppData - 55  (both in nsAppData.o)
+ 0012FE8C  153AE56B   XUL       0001:0016E56B  between NS_TableDrivenQI + 5B and std::string::c_str - 35  (in nsISupportsImpl.o and string-inst.obj)
+ 0012FEA4  152D324A   XUL       0001:0009324A  between _XRE_InitCommandLine + 97A and _XRE_main - 202  (both in nsAppRunner.o)
+ 0012FEBC  15241C0C   XUL       0001:00001C0C  between nsILocalFile::COMTypeInfo::kIID + C and nsCategoryListener::{vtable} - 4  (both in dlldeps.o)
+ 0012FEC0  152D8FA1   XUL       0001:00098FA1  between SetAllocatedString + 145 and _XRE_ParseAppData - 13  (both in nsAppData.o)
+ 0012FEC8  152D3257   XUL       0001:00093257  between _XRE_InitCommandLine + 987 and _XRE_main - 1F5  (both in nsAppRunner.o)
+ 0012FED4  152D3348   XUL       0001:00093348  between _XRE_InitCommandLine + A78 and _XRE_main - 104  (both in nsAppRunner.o)
+ 0012FF4C  00010248   FIREFOX   0001:00000248  between main + 104 and ___do_global_ctors - 178  (in nsBrowserApp.o and __main.obj)
+ 0012FF64  1D14C9BC   LIBC063   0001:0002C9BC  signals.c#655 ___libc_back_signalInitExe 0001:0002C989 (signals.obj)
+ 0012FF74  1D14C9E6   LIBC063   0001:0002C9E6  signals.c#661 ___libc_back_signalInitExe 0001:0002C989 (signals.obj)
+ 0012FF7C  00010082   FIREFOX   0001:00000082  between __text + 82 and _main - C2  (in {standard input} and nsBrowserApp.o)
+ 0012FFA4  00010021   FIREFOX   0001:00000021  between __text + 21 and _main - 123  (in {standard input} and nsBrowserApp.o)
+ 0012FFB8  1D1662D0   LIBC063   0001:000462D0  exceptions.c#76 __libc_Back_exceptionHandler 0001:000462D0 (exceptions.obj)
+ 0012FFD4  1D130F22   LIBC063   0001:00010F22  __init.c#261 ___init 0001:00010ED0 (D:\CODING\LIBC\SVN\BRANCHES\LIBC-0.6\src\emx\src\lib\sys\__init.c)
+ 0012FFE4  1D14854B   LIBC063   0001:0002854B  appinit.s#16 ___init_app 0001:00028540 (appinit.obj)
+ 0012FFEC  1FFECE38   DOSCALL1  0004:0000CE38 
+
+______________________________________________________________________
+
+ Stack Contents from ESP-104 to Stack Base  (ESP = 0012F934)
+______________________________________________________________________
+
+ --addr--   --------------dwords---------------   -----chars------
+ 0012F830 : 00000000 00000000 00000169 00000000 : ........i.......
+ 0012F840 : 00000000 FFFF0000 02F40000 0000B970 : ............p...
+ 0012F850 : 00000000 00000000 00000000 00000000 : ................
+ 0012F860 : 00000000 20200000 00004020 00000000 : ......   @......
+ 0012F870 : 00000000 00000000 0000150B 00000053 : ............S...
+ 0012F880 : 00000053 01F300F6 2003D3E0 01F300F6 : S.......... ....
+ 0012F890 : 00000410 00000000 2003D3E0 0012F9AC : ........... ....
+ 0012F8A0 : 160CD8D4 0000005B 00210246 0012F934 : ....[...F.!.4...
+ 0012F8B0 : 00000053 800002CB 00000070 01F300F6 : S.......p.......
+ 0012F8C0 : 00000000 00694370 0012F8F8 00000000 : ....pCi.........
+ 0012F8D0 : 00000000 00000000 00000000 00000001 : ................
+ 0012F8E0 : 00000001 00000001 00000001 00000001 : ................
+ 0012F8F0 : 1B360000 1B360000 00000001 00000001 : ..6...6.........
+ 0012F900 : 00000001 00000001 00000001 0012F95C : ............\...
+ 0012F910 : 153AE56B 2003D3E0 00000001 00000000 : k.:.... ........
+ 0012F920 : 00000001 00000001 00000001 00000001 : ................
+ 0012F930 : 00000001 1B360000 0012F970 1EE4008C : ......6.p.......
+ 0012F940 : 15241BDC 00000410 1FD2A7BB 00000004 : ..$.............
+ 0012F950 : 0012F9DC 00000410 0012F9E0 0012F97C : ............|...
+ 0012F960 : 15E83E47 2003D3E0 15E84CD0 15241BD0 : G>..... .L....$.
+ 0012F970 : 0012F9A0 2003D3E0 0012F9DC 0012F9AC : ....... ........
+ 0012F980 : 1536DC3B 2003D3E0 15241BD0 0012F9A0 : ;.6.... ..$.....
+ 0012F990 : 00000000 00000000 00000001 0012FA70 : ............p...
+ 0012F9A0 : 2003D3E0 00000410 0012F9E0 0012F9FC : ... ............
+ 0012F9B0 : 160CDC6A 2003D3E0 00000410 01F300F6 : j...... ........
+ 0012F9C0 : 00000000 00000000 0012FA70 00000001 : ........p.......
+ 0012F9D0 : 0012F9DC 0012FA0C 00070001 2003D3E0 : ............... 
+ 0012F9E0 : 00000001 00000000 00000001 00000001 : ................
+ 0012F9F0 : 0012FA70 00000001 1E94C4AE 0012FA48 : p...........H...
+ 0012FA00 : 1FD059F9 800002CB 00000410 01F300F6 : .Y..............
+ 0012FA10 : 00000000 160CDBDC 00000000 0012FA70 : ............p...
+ 0012FA20 : 20034CF8 20034CF8 0012FA68 00000000 : .L. .L. h.......
+ 0012FA30 : 1B3688C0 800002CB 1B3688C0 00000000 : ..6.......6.....
+ 0012FA40 : 1B365AE0 0012FA70 0012FA98 161D07E2 : .Z6.p...........
+ 0012FA50 : 00000000 0012FA70 00000000 00000000 : ....p...........
+ 0012FA60 : 00000FFF 00000001 0012FA88 1561E0DE : ..............a.
+ 0012FA70 : 800002CB 00000410 01F300F6 00000000 : ................
+ 0012FA80 : 00694370 000103C5 00000204 00000000 : pCi.............
+ 0012FA90 : 200442C0 00000000 0012FAB8 160046C3 : .B. .........F..
+ 0012FAA0 : 200442C0 00000001 00000001 00000000 : .B. ............
+ 0012FAB0 : 200442C0 20034CC0 0012FAF8 1600498A : .B. .L. .....I..
+ 0012FAC0 : 200442C0 00000001 0012FAF8 16004E89 : .B. .........N..
+ 0012FAD0 : 200442CC 00000000 00000001 000005D3 : .B. ............
+ 0012FAE0 : 1847F0E0 00000001 20AC2980 20034CC0 : ..G......). .L. 
+ 0012FAF0 : 00000001 16004888 0012FB58 1561DE66 : .....H..X...f.a.
+ 0012FB00 : 200442C0 20034CC0 00000001 00000000 : .B. .L. ........
+ 0012FB10 : 15D2A652 00000080 0012FB58 00000001 : R.......X.......
+ 0012FB20 : 00000001 15D2A652 00000008 00000000 : ....R...........
+ 0012FB30 : 00120072 152D341E 20D3CEBC 200442C4 : r....4-.... .B. 
+ 0012FB40 : 200304A8 184B1480 0012FB68 200442C0 : ... ..K.h....B. 
+ 0012FB50 : 20034CC0 0012FEF0 0012FB88 1539C1C7 : .L. ..........9.
+ 0012FB60 : 20034CC0 00000001 0012FB7C 1539C172 : .L. ....|...r.9.
+ 0012FB70 : 184B1480 0012FB68 204754E0 00000001 : ..K.h....TG ....
+ 0012FB80 : 00000000 20215164 0012FBA8 16004ADC : ....dQ! .....J..
+ 0012FB90 : 20034CC0 00000001 0012FBC8 15D2A6AD : .L. ............
+ 0012FBA0 : 20289140 00000000 0012FBC8 15E53357 : @.( ........W3..
+ 0012FBB0 : 200442C0 153553C4 00000000 2018ED00 : .B. .S5........ 
+ 0012FBC0 : 00000000 0012FD74 0012FF48 152D498F : ....t...H....I-.
+ 0012FBD0 : 20289140 0012FF00 152D341E 00000000 : @.( .....4-.....
+ 0012FBE0 : 00000000 0012FD84 0012FC28 1D12ACEC : ........(.......
+ 0012FBF0 : 2003011C 0012FEFC 00000000 0012FF04 : ... ............
+ 0012FC00 : 0012FF00 0012FEE8 0012FEEC 0012FEFC : ................
+ 0012FC10 : 00000001 0012FCD0 0012FEA4 0012FEDC : ................
+ 0012FC20 : 20030000 00000000 0012FC3C 00000006 : ... ....<.......
+ 0012FC30 : 00010011 0000003F 0012FC3C 465C3A4D : ....?...<...M:\F
+ 0012FC40 : 2D00584F 33636367 32303100 32313931 : OX.-gcc3.1021912
+ 0012FC50 : 30333230 3130322F 31323031 30323139 : 0230/20110219120
+ 0012FC60 : 00303332 20030000 0012FC98 1D12A6D6 : 230.... ........
+ 0012FC70 : 2003013C 0000000F 00000004 0012FC90 : <.. ............
+ 0012FC80 : 00000027 00010011 0000003F 0012FC90 : '.......?.......
+ 0012FC90 : 62302E34 72703231 30325F65 32303131 : 4.0b12pre_201102
+ 0012FCA0 : 32313931 30333230 3130322F 31323031 : 19120230/2011021
+ 0012FCB0 : 30323139 00303332 0012FCD8 15377B49 : 9120230.....I{7.
+ 0012FCC0 : 0000000F 20030414 0012FCF8 1D186AD2 : ....... .....j..
+ 0012FCD0 : 20035290 00000007 00010005 0000003F : .R. ........?...
+ 0012FCE0 : 0012FCE4 00000000 00000001 00000001 : ................
+ 0012FCF0 : 00000001 00000001 00000000 00000007 : ................
+ 0012FD00 : 2003013C 00000001 00000001 20039110 : <.. ........... 
+ 0012FD10 : 20039110 00000000 0012FD58 15378791 : ... ....X.....7.
+ 0012FD20 : 20039110 18488810 00000000 40C0001C : ... ..H........@
+ 0012FD30 : 0000000C 00000001 00000000 00000000 : ................
+ 0012FD40 : 20034CC0 20034DA0 33323032 00000030 : .L. .M. 20230...
+ 0012FD50 : 20039110 00000000 0012FDB8 15378FD2 : ... ..........7.
+ 0012FD60 : 20039110 00000000 00000000 00000006 : ... ............
+ 0012FD70 : 00000006 00000038 20039100 200371C8 : ....8...... .q. 
+ 0012FD80 : 200371D8 200304B4 20035258 20039160 : .q. ... XR. `.. 
+ 0012FD90 : 00000000 0000000E 200349A0 200304C8 : .........I. ... 
+ 0012FDA0 : 2003048C 20034860 00000000 15F00A18 : ... `H. ........
+ 0012FDB0 : 15F00A3C 00000000 200349A0 20039100 : <........I. ... 
+ 0012FDC0 : 20034E40 20034EA0 00000001 00000000 : @N. .N. ........
+ 0012FDD0 : 00000000 2039C720 00000001 0012FDE4 : .... .9 ........
+ 0012FDE0 : 1855DF40 0012FFB4 181611F0 00000038 : @.U.........8...
+ 0012FDF0 : 0012FE88 0012FE88 0012FE48 15395E50 : ........H...P^9.
+ 0012FE00 : 152D2E74 00000000 00000000 0012FEA2 : t.-.............
+ 0012FE10 : 0012FEA2 0012FE9C 0012FEA2 15395E50 : ............P^9.
+ 0012FE20 : 152D32E8 00000000 0012FF2C 152D0D3D : .2-.....,...=.-.
+ 0012FE30 : 00000011 00000001 0012FE68 1538A0AF : ........h.....8.
+ 0012FE40 : 20039108 00000000 0012FE68 1538A037 : ... ....h...7.8.
+ 0012FE50 : 20039100 1538AA54 152D6520 0012FF2C : ... T.8. e-.,...
+ 0012FE60 : 0012FE88 0012FF2C 0012FEF8 15387B26 : ....,.......&{8.
+ 0012FE70 : 0012FE88 152D6520 0012FF2C 00000002 : .... e-.,.......
+ 0012FE80 : 152D8F45 152D8F5F 0012FED8 153AE56B : E.-._.-.....k.:.
+ 0012FE90 : 20039108 0000003F 0012FE9C 465C3A4D : ... ?.......M:\F
+ 0012FEA0 : 4000584F 152D324A 0000000C 00000001 : OX.@J2-.........
+ 0012FEB0 : 00000000 20034860 20034940 15241C0C : ....`H. @I. ..$.
+ 0012FEC0 : 152D8FA1 200347F0 152D3257 0000000C : ..-..G. W2-.....
+ 0012FED0 : 00000001 152D3348 0012FEE0 2003B3A4 : ....H3-........ 
+ 0012FEE0 : 00000000 00000001 20289140 2040AC60 : ........@.( `.@ 
+ 0012FEF0 : 200444C4 00000001 2018ED00 201AE760 : .D. ....... `.. 
+ 0012FF00 : 00000000 20034400 20034400 20034EA0 : .....D. .D. .N. 
+ 0012FF10 : 20034E40 20034C80 00000001 20039100 : @N. .L. ....... 
+ 0012FF20 : 00000001 200304A0 00000000 00000000 : ....... ........
+ 0012FF30 : 00236560 00000000 E9170000 0012FFBC : `e#.............
+ 0012FF40 : 00000000 0012FF8C 0012FFA0 00010248 : ............H...
+ 0012FF50 : 00000001 0012FFBC 200347C0 00000002 : .........G. ....
+ 0012FF60 : 0012FF90 1D14C9BC 20034720 0012FFBC : ........ G. ....
+ 0012FF70 : 00000000 1D14C9E6 00000001 00010082 : ................
+ 0012FF80 : 0000000F 00000001 200347C0 20034720 : .........G.  G. 
+ 0012FF90 : 0012FFE0 0012FFA8 00000000 00000000 : ................
+ 0012FFA0 : 0012FFE0 00010021 00000001 0012FFBC : ....!...........
+ 0012FFB0 : 20030180 FFFFFFFF 1D1662D0 0012FFC5 : ... .....b......
+ 0012FFC0 : 00000000 52494680 584F4645 4558452E : .....FIREFOX.EXE
+ 0012FFD0 : 00000000 1D130F22 00000000 00000000 : ...."...........
+ 0012FFE0 : 00000000 1D14854B 00000001 1FFECE38 : ....K.......8...
+ 0012FFF0 : 00000F1B 00000000 00130000 00130BE1 : ................
+
+______________________________________________________________________
+
+ Memory addressed by EDX (2003D3E0) for 256 bytes
+______________________________________________________________________
+
+ --addr--   -----dwords------   ---------bytes---------   -chars--
+ 2003D3E0 : 15351CB8 00000000 : B8 1C 35 15 00 00 00 00 : ..5.....
+ 2003D3E8 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D3F0 : 00000000 00000004 : 00 00 00 00 04 00 00 00 : ........
+ 2003D3F8 : 2064171C 00000000 : 1C 17 64 20 00 00 00 00 : ..d ....
+ 2003D400 : 156AA7BC 00000000 : BC A7 6A 15 00 00 00 00 : ..j.....
+ 2003D408 : 2055D5A0 2044B378 : A0 D5 55 20 78 B3 44 20 : ..U x.D 
+ 2003D410 : 20A72DE0 20A72DE0 : E0 2D A7 20 E0 2D A7 20 : .-. .-. 
+ 2003D418 : 23B30CFE 201CC070 : FE 0C B3 23 70 C0 1C 20 : ...#p.. 
+ 2003D420 : 00000000 00000003 : 00 00 00 00 03 00 00 00 : ........
+ 2003D428 : FFFFFFFF 00000000 : FF FF FF FF 00 00 00 00 : ........
+ 2003D430 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D438 : 000003B3 000003F0 : B3 03 00 00 F0 03 00 00 : ........
+ 2003D440 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D448 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D450 : 00000000 00000002 : 00 00 00 00 02 00 00 00 : ........
+ 2003D458 : 800002CB 20488880 : CB 02 00 80 80 88 48 20 : ......H 
+ 2003D460 : 00000000 00000004 : 00 00 00 00 04 00 00 00 : ........
+ 2003D468 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D480 : 3 lines not printed duplicate the line above
+ 2003D488 : 20AEE500 204905A0 : 00 E5 AE 20 A0 05 49 20 : ... ..I 
+ 2003D490 : 6DB6DBBC 000000AC : BC DB B6 6D AC 00 00 00 : ...m....
+ 2003D498 : 00000068 20030151 : 68 00 00 00 51 01 03 20 : h...Q.. 
+ 2003D4A0 : 2003D520 00000000 : 20 D5 03 20 00 00 00 00 :  .. ....
+ 2003D4A8 : 2003D5C0 207BBA00 : C0 D5 03 20 00 BA 7B 20 : ... ..{ 
+ 2003D4B0 : 2003D600 00000000 : 00 D6 03 20 00 00 00 00 : ... ....
+ 2003D4B8 : 00000000 20040680 : 00 00 00 00 80 06 04 20 : ....... 
+ 2003D4C0 : 00000000 2055C744 : 00 00 00 00 44 C7 55 20 : ....D.U 
+ 2003D4C8 : 2078A1E0 2054DB68 : E0 A1 78 20 68 DB 54 20 : ..x h.T 
+ 2003D4D0 : 00000000 2055CA00 : 00 00 00 00 00 CA 55 20 : ......U 
+
+______________________________________________________________________
+
+ Memory addressed by ESI (2003D3E0) for 256 bytes
+______________________________________________________________________
+
+ --addr--   -----dwords------   ---------bytes---------   -chars--
+ 2003D3E0 : 15351CB8 00000000 : B8 1C 35 15 00 00 00 00 : ..5.....
+ 2003D3E8 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D3F0 : 00000000 00000004 : 00 00 00 00 04 00 00 00 : ........
+ 2003D3F8 : 2064171C 00000000 : 1C 17 64 20 00 00 00 00 : ..d ....
+ 2003D400 : 156AA7BC 00000000 : BC A7 6A 15 00 00 00 00 : ..j.....
+ 2003D408 : 2055D5A0 2044B378 : A0 D5 55 20 78 B3 44 20 : ..U x.D 
+ 2003D410 : 20A72DE0 20A72DE0 : E0 2D A7 20 E0 2D A7 20 : .-. .-. 
+ 2003D418 : 23B30CFE 201CC070 : FE 0C B3 23 70 C0 1C 20 : ...#p.. 
+ 2003D420 : 00000000 00000003 : 00 00 00 00 03 00 00 00 : ........
+ 2003D428 : FFFFFFFF 00000000 : FF FF FF FF 00 00 00 00 : ........
+ 2003D430 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D438 : 000003B3 000003F0 : B3 03 00 00 F0 03 00 00 : ........
+ 2003D440 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D448 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D450 : 00000000 00000002 : 00 00 00 00 02 00 00 00 : ........
+ 2003D458 : 800002CB 20488880 : CB 02 00 80 80 88 48 20 : ......H 
+ 2003D460 : 00000000 00000004 : 00 00 00 00 04 00 00 00 : ........
+ 2003D468 : 00000000 00000000 : 00 00 00 00 00 00 00 00 : ........
+ 2003D480 : 3 lines not printed duplicate the line above
+ 2003D488 : 20AEE500 204905A0 : 00 E5 AE 20 A0 05 49 20 : ... ..I 
+ 2003D490 : 6DB6DBBC 000000AC : BC DB B6 6D AC 00 00 00 : ...m....
+ 2003D498 : 00000068 20030151 : 68 00 00 00 51 01 03 20 : h...Q.. 
+ 2003D4A0 : 2003D520 00000000 : 20 D5 03 20 00 00 00 00 :  .. ....
+ 2003D4A8 : 2003D5C0 207BBA00 : C0 D5 03 20 00 BA 7B 20 : ... ..{ 
+ 2003D4B0 : 2003D600 00000000 : 00 D6 03 20 00 00 00 00 : ... ....
+ 2003D4B8 : 00000000 20040680 : 00 00 00 00 80 06 04 20 : ....... 
+ 2003D4C0 : 00000000 2055C744 : 00 00 00 00 44 C7 55 20 : ....D.U 
+ 2003D4C8 : 2078A1E0 2054DB68 : E0 A1 78 20 68 DB 54 20 : ..x h.T 
+ 2003D4D0 : 00000000 2055CA00 : 00 00 00 00 00 CA 55 20 : ......U 
+
+______________________________________________________________________
+
+ DLLs accessible from this process
+______________________________________________________________________
+
+ XUL         M:\FOX\XUL.DLL
+ NSSCKBI     M:\FOX\NSSCKBI.DLL
+ FREEBL3     M:\FOX\FREEBL3.DLL
+ NSSDBM3     M:\FOX\NSSDBM3.DLL
+ SOFTOKN3    M:\FOX\SOFTOKN3.DLL
+ NPMP        E:\MOZPLUGINS\NPMP.DLL
+ VIDVCI      F:\MMOS2\DLL\VIDVCI.DLL
+ BRWSRCMP    M:\FOX\COMPONENTS\BRWSRCMP.DLL
+ EXCEPTQ     F:\LIBRARY\EXCEPTQ.DLL
+ PMCTLS      F:\OS2\DLL\PMCTLS.DLL
+ DIVE        F:\MMOS2\DLL\DIVE.DLL
+ NSSUTIL3    M:\FOX\NSSUTIL3.DLL
+ SSL3        M:\FOX\SSL3.DLL
+ SMIME3      M:\FOX\SMIME3.DLL
+ MOZSQLT3    M:\FOX\MOZSQLT3.DLL
+ NSS3        M:\FOX\NSS3.DLL
+ PLDS4       M:\FOX\PLDS4.DLL
+ MOZALLOC    M:\FOX\MOZALLOC.DLL
+ PLC4        M:\FOX\PLC4.DLL
+ NSPR4       M:\FOX\NSPR4.DLL
+ XPCOM       M:\FOX\XPCOM.DLL
+ MMPM        F:\MMOS2\DLL\MMPM.DLL
+ PMMERGE     F:\OS2\DLL\PMMERGE.DLL
+ PMGPI       F:\OS2\DLL\PMGPI.DLL
+ DISTORM     F:\LIBRARY\DISTORM.DLL
+ LIBC063     G:\GCC335\LIB\LIBC063.DLL
+ OBJDCCHK    F:\OD15\OBJDCCHK.DLL
+ OBJDTAHK    F:\OD15\OBJDTAHK.DLL
+ TCPIP32     F:\MPTN\DLL\TCPIP32.DLL
+ TCP32DLL    F:\MPTN\DLL\TCP32DLL.DLL
+ SO32DLL     F:\MPTN\DLL\SO32DLL.DLL
+ SDDHOOK     F:\OS2\DLL\SDDHOOK.DLL
+ XWPHOOK     F:\ECS\SYSTEM\EWPS\BIN\XWPHOOK.DLL
+ HHP         F:\MMOS2\DLL\HHP.DLL
+ FILT        F:\MMOS2\DLL\FILT.DLL
+ MDM         F:\MMOS2\DLL\MDM.DLL
+ DRGTXT39    F:\DRGTXT39\DRGTXT39.DLL
+ ESTLRL11    F:\ECS\DLL\ESTLRL11.DLL
+ OBJDCOMN    F:\OD15\OBJDCOMN.DLL
+ OBJDWCTL    F:\OD15\OBJDWCTL.DLL
+ MMPMCRTS    F:\OS2\DLL\MMPMCRTS.DLL
+ SW          F:\MMOS2\DLL\SW.DLL
+ SND         F:\MMOS2\DLL\SND.DLL
+ SDDGRADD    F:\OS2\DLL\SDDGRADD.DLL
+ SDDGREXT    F:\OS2\DLL\SDDGREXT.DLL
+ FREETYPE    F:\OS2\DLL\FREETYPE.DLL
+ PMUNIF      F:\OS2\DLL\PMUNIF.DLL
+ PMATM       F:\OS2\DLL\PMATM.DLL
+ DISPLAY     F:\OS2\DLL\DISPLAY.DLL
+ VMAN        F:\OS2\DLL\VMAN.DLL
+ GRE2VMAN    F:\OS2\DLL\GRE2VMAN.DLL
+ SDDPMI      F:\OS2\DLL\SDDPMI.DLL
+ VIDEOPMI    F:\OS2\DLL\VIDEOPMI.DLL
+ LOCALE      F:\OS2\DLL\LOCALE.DLL
+ PMSHLTKT    F:\OS2\DLL\PMSHLTKT.DLL
+ PMVIOP      F:\OS2\DLL\PMVIOP.DLL
+ SOMIR       F:\OS2\DLL\SOMIR.DLL
+ SOMTC       F:\OS2\DLL\SOMTC.DLL
+ SOFTDRAW    F:\OS2\DLL\SOFTDRAW.DLL
+ SPL1B       F:\OS2\DLL\SPL1B.DLL
+ PMSPL       F:\OS2\DLL\PMSPL.DLL
+ IBMHMGR     F:\OS2\DLL\IBMHMGR.DLL
+ BDCALL32    F:\OS2\DLL\BDCALL32.DLL
+ PMBIDI      F:\OS2\DLL\PMBIDI.DLL
+ HELPMGR     F:\OS2\DLL\HELPMGR.DLL
+ PMEX        F:\OS2\DLL\PMEX.DLL
+ BDWPCLS     F:\OS2\DLL\BDWPCLS.DLL
+ FFST        F:\OS2\DLL\FFST.DLL
+ SOMU        F:\OS2\DLL\SOMU.DLL
+ SOM         F:\OS2\DLL\SOM.DLL
+ UCONV       F:\OS2\DLL\UCONV.DLL
+ LIBUNI      F:\OS2\DLL\LIBUNI.DLL
+ SEAMLESS    F:\OS2\DLL\SEAMLESS.DLL
+ IMP         F:\OS2\DLL\IMP.DLL
+ PMWP        F:\OS2\DLL\PMWP.DLL
+ DOSCALL1    F:\OS2\DLL\DOSCALL1.DLL
+
+______________________________________________________________________
+
+ End of Exception Report - report took 477 ms to generate
+______________________________________________________________________
+

@@ -1,0 +1,19 @@
+
+; $Id: exceptq.def,v 1.4 2010/04/28 15:34:29 Steven Exp $
+
+; 12 Sep 07 SHL Add bldlevel info
+; 24 May 08 SHL version 6.7
+; 03 Dec 09 SHL version 6.8 beta
+; 28 Apr 10 SHL version 6.10 beta
+
+LIBRARY EXCEPTQ INITINSTANCE
+DATA MULTIPLE NONSHARED
+DESCRIPTION '@#SLAInc:6.8#@##1## 2010/04/28 06:10:00      SLAMain::EN:US:0:U:@@exceptq DLL Copyright (c) 2010, 2009 Steven Levine and Associates, Inc.'
+EXPORTS
+    SETEXCEPT
+    UNSETEXCEPT
+    MYHANDLER
+    FORCEEXIT
+IMPORTS
+    DOSQPROCSTATUS=DOSCALL1.154
+    DOSQUERYMODFROMEIP=DOSCALL1.360
